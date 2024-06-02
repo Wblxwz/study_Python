@@ -14,3 +14,5 @@ def deco(func):
 def ceShi(a):
     return a
 
+if (__name__ == '__main__'):
+    print(ceShi(5))
