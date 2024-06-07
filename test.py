@@ -1,5 +1,7 @@
 import array
+import asyncio
 import copy
+import threading
 import weakref
 import struct
 import abc
@@ -106,6 +108,12 @@ def coroutine():
 
 def threadFunc(num):
     print('thread',num)
+    return num
+
+async def my_coroutine():
+    print('coroutine start...')
+    await asyncio.sleep(3)
+    print('coroutine end...')
 
 if (__name__ == '__main__'):
     """myTuple = MyTuple(0,1)
@@ -157,7 +165,7 @@ Executor.map 函数返回结果的顺序与调用开始的顺序一致。如果�
     #Process的参数大多数情况下不使用——默认值是os.cpu_count() 函数返回的 CPU 数量。
     with futures.ProcessPoolExecutor() as pp:
         pp.map(threadFunc,nums)"""
-    my_futures = []
+    """my_futures = []
     with futures.ThreadPoolExecutor(3) as ftp:
         for num in nums:
             future = ftp.submit(threadFunc,num)
@@ -166,3 +174,26 @@ Executor.map 函数返回结果的顺序与调用开始的顺序一致。如果�
         for future in futures.as_completed(my_futures):
             res = future.result()
             results.append(res)
+        print(results)"""
+
+    """threads = []
+    for num in nums:
+        thread = threading.Thread(target=threadFunc,args=[num])
+        thread.start()
+        threads.append(thread)
+    for thread in threads:
+        thread.join()"""
+
+    #协程在线程中由用户控制，所以无法并行;协程使用阻塞IO会将当前线程阻塞，就不能切换协程了
+    #asyncio.run(my_coroutine())
+    """lis = [1,2,3]
+    print(lis[-1])"""
+    import multiprocessing
+    processes = []
+    for num in nums:
+        p = multiprocessing.Process(target=threadFunc,args=[num])
+        processes.append(p)
+        p.start()
+    for p in processes:
+        p.join()
+    print(multiprocessing.Process.__mro__)
