@@ -188,7 +188,7 @@ Executor.map 函数返回结果的顺序与调用开始的顺序一致。如果�
     #asyncio.run(my_coroutine())
     """lis = [1,2,3]
     print(lis[-1])"""
-    import multiprocessing
+    """import multiprocessing
     processes = []
     for num in nums:
         p = multiprocessing.Process(target=threadFunc,args=[num])
@@ -196,4 +196,7 @@ Executor.map 函数返回结果的顺序与调用开始的顺序一致。如果�
         p.start()
     for p in processes:
         p.join()
-    print(multiprocessing.Process.__mro__)
+    print(multiprocessing.Process.__mro__)"""
+    a=[1,2,3]
+    print(a[0:3])
+
