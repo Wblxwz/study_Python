@@ -115,6 +115,9 @@ async def my_coroutine():
     await asyncio.sleep(3)
     print('coroutine end...')
 
+def test_print():
+    print("test")
+
 if (__name__ == '__main__'):
     """myTuple = MyTuple(0,1)
     # print(struct.pack('<I',1))
