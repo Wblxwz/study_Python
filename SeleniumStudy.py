@@ -1,3 +1,4 @@
+import csv
 import time
 import logging
 from test import test_print
@@ -13,6 +14,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+
+#通过模块化、参数化的方式进行自动化测试，减少冗余代码
 test_print()
 #打印日志，selenium是B/S架构，通过http请求控制浏览器自动化测试
 #logging.basicConfig(level=logging.DEBUG)
@@ -61,3 +64,8 @@ time.sleep(3)
 
 print("%r" % "quit")
 driver.quit()
+
+with open("./test.csv","r") as file:
+    reader = csv.reader(file)
+    for row in reader:
+        print(row)
