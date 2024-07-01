@@ -1,0 +1,12 @@
+test2 (__main__.Test.test2)
+test2 ... ok
+test3 (__main__.Test.test3)
+test3 ... ok
+fail (__main__.Test.fail) ... unexpected success
+
+======================================================================
+UNEXPECTED SUCCESS: fail (__main__.Test.fail)
+----------------------------------------------------------------------
+Ran 3 tests in 3.528s
+
+FAILED (unexpected successes=1)
