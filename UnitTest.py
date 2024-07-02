@@ -1,10 +1,11 @@
 import unittest
-
+from HtmlTestRunner import HTMLTestRunner
 def setUpModule():
     print(1111)
 
 @unittest.skipIf(1 > 2,"False")
 class Test(unittest.TestCase):
+    """Test"""
     def setUp(self) -> None:
         print("before test")
     def test(self):
@@ -29,12 +30,13 @@ class Test(unittest.TestCase):
         print(6666)
 
 if __name__ == "__main__":
-    with open("./report/report.txt","w") as file:
+    #with open("./report/report.txt","w") as file:
         suite = unittest.TestSuite()
         #全部测试
         #suite = unittest.TestLoader().loadTestsFromTestCase(Test)
         suite.addTests([Test("test2"),Test("test3"),Test("fail")])
         #unittest.main()
         #verbosity:0（静默模式）、1（默认模式，显示简单的测试结果）、2（详细模式，显示每个测试用例的详细信息）。
-        runner = unittest.TextTestRunner(stream=file,verbosity=2)
+        #runner = unittest.TextTestRunner(stream=file,verbosity=2)
+        runner = HTMLTestRunner(output="./report",report_title="用例执行情况",report_name="test_report")
         runner.run(suite)
