@@ -19,7 +19,7 @@ from selenium.webdriver.support import expected_conditions as EC
 test_print()
 #打印日志，selenium是B/S架构，通过http请求控制浏览器自动化测试
 #logging.basicConfig(level=logging.DEBUG)
-driver = webdriver.ChromiumEdge()
+driver = webdriver.Edge()
 
 driver.maximize_window()
 driver.get("https://www.bilibili.com")
