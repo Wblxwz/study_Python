@@ -1,7 +1,7 @@
 import array
 import asyncio
 import copy
-import threading
+import thread
 import weakref
 import struct
 import abc
