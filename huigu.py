@@ -6,6 +6,10 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from unittest import TestCase
+import unittest
+from HtmlTestRunner import HTMLTestRunner
+
 def waitIframe(driver,id):
     try:
         driver.find_element(By.ID,id)
@@ -18,6 +22,8 @@ def logIn(webDriver):
     if webDriver == "Edge":
         driver = webdriver.Edge()
 
+        #隐式等待，每当一个元素未定位时即等待一段时间
+        #driver.implicitly_wait(5)
         driver.get("https://www.douyu.com")
         driver.maximize_window()
 
@@ -51,5 +57,33 @@ def logIn(webDriver):
 
         driver.quit()
 
+class TestClass(TestCase):
+    """setUp/tearDown在每个测试前后都会执行
+       setUpClass/tearDownClass在整个测试类前后执行
+    """
+    @classmethod
+    def setUpClass(cls) -> None:
+        print("start class")
+    @classmethod
+    def tearDownClass(cls) -> None:
+        print("end class")
+    def setUp(self) -> None:
+        print("start unittest...")
+    def testCase1(self):
+        """ceShi 1=1"""
+        self.assertEqual(1,1,"equal")
+    def testCase2(self):
+        """ceShi 2!=1"""
+        self.assertNotEqual(2,1,"equal")
+    def tearDown(self) -> None:
+        print("end unittest...")
+
 if __name__ == "__main__":
-    logIn("Edge")
+    #logIn("Edge")
+    t = TestClass()
+    suite = unittest.TestSuite()
+    suite.addTests([TestClass("testCase1"),TestClass("testCase2")])
+    #runner = unittest.TextTestRunner()
+    runner = HTMLTestRunner(report_title="huiGUTest")
+    runner.run(suite)
+    #unittest.main()
